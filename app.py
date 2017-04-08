@@ -43,7 +43,7 @@ def processRequest(req):
 #     if yql_query is None:
 #         return {}
 #     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    final_url = "https://api.census.gov/data/2014/pep/natstprc?get=STNAME,POP&DATE=2&for=state:*"
+    final_url = "https://api.census.gov/data/2014/pep/natstprc?get=POP,STNAME&DATE=2&for=state:01"
     result = urlopen(final_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
@@ -61,12 +61,11 @@ def processRequest(req):
 
 
 def makeWebhookResult(data):
-#     base = data[0][0]
+    target = data[1][0]
 
     # print(json.dumps(item, indent=4))
 
-    speech = "Test"
-
+    speech = target
     print("Response:")
     print(speech)
 
