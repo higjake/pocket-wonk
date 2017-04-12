@@ -61,11 +61,10 @@ def processRequest(req):
 
 
 def makeWebhookResult(data):
-    target = data[1][0]
+    speech = data[1][0]
 
     # print(json.dumps(item, indent=4))
 
-    speech = target
     print("Response:")
     print(speech)
 
