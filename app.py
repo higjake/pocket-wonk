@@ -62,7 +62,12 @@ def makeQuery(req):
 def makeWebhookResult(data, action):
     firstresult = data[0]
     if firstresult is None:
-        return {}
+        return {
+        "speech": "this failed",
+        "displayText": "this failed",
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"}
     
     # print(json.dumps(item, indent=4))
     firstresult = data[0] # Adding this line as a sanity check
