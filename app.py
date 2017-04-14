@@ -36,26 +36,28 @@ def webhook():
     return r
 def processRequest(req):
     action = req.get("result").get("action")
-    baseurl = "https://api.census.gov/data/2014/pep/natstprc?get=STNAME,POP&DATE=1&for=state:*"
-#     url_query = makeQuery(req)
-#     if url_query is None:
-#         return {}
-#     final_url = baseurl + url_query
+    baseurl = "https://api.census.gov/data/"
+    url_query = makeQuery(req)
+    if url_query is None:
+        return {}
+    final_url = baseurl + url_query
 #     #final_url = baseurl + urlencode({url_query})
 #     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(baseurl).read()
     data = json.loads(result)
     res = makeWebhookResult(data, action)
     return res
-# def makeQuery(req):
-#     result = req.get("result")
-#     contexts = result.get("contexts")
-#     parameters = contexts[0].get("parameters")
-#     state = parameters.get("state")
-#     if state is None:
-#         return None
+def makeQuery(req):
+    result = req.get("result")
+    contexts = result.get("contexts")
+    parameters = contexts[0].get("parameters")
+    state = parameters.get("state")
+    target_metric = parameters.get("target-metric")
+    year = parameters.get("year")
+    if state is None:
+        return None
     
-#     return state
+    return year + "/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
 
 def makeWebhookResult(data, action):
     array1 = data[1]
