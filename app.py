@@ -42,7 +42,7 @@ def processRequest(req):
     final_url = baseurl + url_query
 #     #final_url = baseurl + urlencode({url_query})
 #     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
-    result = urlopen(baseurl).read()
+    result = urlopen(final_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
