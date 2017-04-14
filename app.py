@@ -60,8 +60,8 @@ def makeQuery(req):
     return state
 
 def makeWebhookResult(data, action):
-    array = data[0][0]
-    if array is None:
+    array1 = data[0]
+    if array1 is None:
         return {
         "speech": "this failed",
         "displayText": "this failed",
@@ -70,7 +70,7 @@ def makeWebhookResult(data, action):
         "source": "apiai-weather-webhook-sample"}
     
     # print(json.dumps(item, indent=4))
-    array = data[0][0] # Adding this line as a sanity check
+    array1 = data[0] # Adding this line as a sanity check
     speech = array[0]
 #     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
