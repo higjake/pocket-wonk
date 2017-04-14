@@ -51,7 +51,7 @@ def makeQuery(req):
     contexts = result.get("contexts")
     parameters = contexts[0].get("parameters")
     target_metric = parameters.get("target-metric")
-    year = parameters.get("year") or "2016"
+    year = parameters.get("year")
     countystate = parameter.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
