@@ -38,26 +38,26 @@ def webhook():
     return r
 def processRequest(req):
     action = req.get("result").get("action")
-    baseurl = "https://api.census.gov/data/2014/pep/natstprc?get=STNAME,POP&DATE=1&for=state:"
-    url_query = makeQuery(req)
-    if url_query is None:
-        return {}
-    final_url = baseurl + url_query
-    #final_url = baseurl + urlencode({url_query})
-    #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
-    result = urlopen(final_url).read()
+    baseurl = "https://api.census.gov/data/2014/pep/natstprc?get=STNAME,POP&DATE=1&for=state:*"
+#     url_query = makeQuery(req)
+#     if url_query is None:
+#         return {}
+#     final_url = baseurl + url_query
+#     #final_url = baseurl + urlencode({url_query})
+#     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
+    result = urlopen(baseurl).read()
     data = json.loads(result)
     res = makeWebhookResult(data, action)
     return res
-def makeQuery(req):
-    result = req.get("result")
-    contexts = result.get("contexts")
-    parameters = contexts[0].get("parameters")
-    state = parameters.get("state")
-    if state is None:
-        return None
+# def makeQuery(req):
+#     result = req.get("result")
+#     contexts = result.get("contexts")
+#     parameters = contexts[0].get("parameters")
+#     state = parameters.get("state")
+#     if state is None:
+#         return None
     
-    return state
+#     return state
 
 def makeWebhookResult(data, action):
     array1 = data[1]
@@ -70,7 +70,7 @@ def makeWebhookResult(data, action):
         "source": "apiai-weather-webhook-sample"}
     
     # print(json.dumps(item, indent=4))
-    array1 = data[0] # Adding this line as a sanity check
+    array1 = data[1] # Adding this line as a sanity check
     speech = "The population for " + array1[0] + " is " + array1[1] + "."
 #     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
