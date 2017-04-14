@@ -53,8 +53,8 @@ def makeQuery(req):
     state = parameters.get("state")
     target_metric = parameters.get("target-metric")
     year = parameters.get("year")
-    if parameters.get("year") is None:
-        return "2014"
+    if year is None:
+        return "2014/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
     
     return year + "/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
 
