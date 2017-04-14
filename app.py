@@ -57,7 +57,7 @@ def makeQuery(req):
     if countystate = "1":
         return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
 
-    return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + county + "&in=state:" + state
+    return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + countystate + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
