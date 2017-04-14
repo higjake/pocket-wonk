@@ -12,13 +12,11 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-# actionMap = {
-#     'getPopulation': {
-#         'speech': 'The population is whatever',
-#         'key': 'business_name',
-#         'count': 1
-#     }
-# }
+categoryMap = {
+    'POP': {
+        'definition': 'population'
+    }
+}
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -71,7 +69,9 @@ def makeWebhookResult(data, action):
     
     # print(json.dumps(item, indent=4))
     array1 = data[1] # Adding this line as a sanity check
-    speech = "The population for " + array1[0] + " is " + array1[1] + ". What else can I help you with?"
+    categories = data[0]
+    lookup_value = categories[1]
+    speech = "The " + categoryMap[lookup_value]['definition'] + " for " + array1[0] + " is " + array1[1] + ". What else can I help you with?"
 #     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
