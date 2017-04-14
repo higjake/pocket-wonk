@@ -53,8 +53,8 @@ def makeQuery(req):
     state = parameters.get("state")
     target_metric = parameters.get("target-metric")
     year = parameters.get("year") or "2016"
-    countystate = parameter.get("countystate") or "1"
-    if countystate = "1":
+    countystate = parameter.get("countystate")
+    if countystate is None:
         return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
 
     return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + countystate + "&in=state:" + state
