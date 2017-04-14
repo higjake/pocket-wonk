@@ -52,9 +52,7 @@ def makeQuery(req):
     parameters = contexts[0].get("parameters")
     state = parameters.get("state")
     target_metric = parameters.get("target-metric")
-    year = parameters.get("year")
-    if year = "":
-        return "2014/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
+    year = parameters.get("year") or "2014"
     
     return year + "/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
 
