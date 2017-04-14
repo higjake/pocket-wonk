@@ -55,7 +55,7 @@ def makeQuery(req):
     countystate = parameter.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
-    county = splitCS[0]
+#     county = splitCS[0]
 #     if county = "*":
     return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
 
