@@ -52,14 +52,14 @@ def makeQuery(req):
     parameters = contexts[0].get("parameters")
     target_metric = parameters.get("target-metric")
     year = parameters.get("year") or "2016"
-    countystate = parameter.get("countystate")
+    countystate = parameter.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
     county = splitCS[0]
     if county = "*":
         return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
 
-    return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + countystate + "&in=state:" + state
+    return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
