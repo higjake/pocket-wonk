@@ -56,10 +56,10 @@ def makeQuery(req):
     splitCS = countystate.split( )
     state = splitCS[1]
     county = splitCS[0]
-    if county = "*":
-        return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
+#     if county = "*":
+    return year + "/pep/population?get=GEONAME," + target_metric + "&for=state:" + state
 
-    return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + county + "&in=state:" + state
+#     return year + "/pep/population?get=GEONAME," + target_metric + "&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
