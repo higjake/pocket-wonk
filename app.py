@@ -35,7 +35,6 @@ def webhook():
     print('Duration: {:10.4f} seconds'.format(end - start))
     return r
 def processRequest(req):
-    action = req.get("result").get("action")
     baseurl = "https://api.census.gov/data/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -45,7 +44,7 @@ def processRequest(req):
 #     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(baseurl).read()
     data = json.loads(result)
-    res = makeWebhookResult(data, action)
+    res = makeWebhookResult(data)
     return res
 def makeQuery(req):
     result = req.get("result")
@@ -59,7 +58,7 @@ def makeQuery(req):
     
     return year + "/pep/natstprc?get=STNAME," + target_metric + "&DATE=1&for=state:" + state
 
-def makeWebhookResult(data, action):
+def makeWebhookResult(data):
     array1 = data[1]
     if array1 is None:
         return {
