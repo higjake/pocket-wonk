@@ -71,7 +71,7 @@ def makeWebhookResult(data, action):
     
     # print(json.dumps(item, indent=4))
     array1 = data[0] # Adding this line as a sanity check
-    speech = array[0]
+    speech = array1[0]
 #     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
