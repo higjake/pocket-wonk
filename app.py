@@ -26,7 +26,7 @@ categoryMap = {
     'RCPTOT': {
         'definition': 'At last census (2012), the number of employees was ',
         'definition2': '. The industry generated $',
-        'definition3': '000 annually. What else can I help you with?'
+        'definition3': '000 annually. What else can I help you with? You can look up industry employment figures and valuations by city, state, county, or nationwide. '
     }
 }
 
