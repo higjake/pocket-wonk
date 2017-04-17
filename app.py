@@ -55,6 +55,7 @@ def processRequest(req):
     return res
 def makeQuery(req):
     result = req.get("result")
+    action = result.get("action")
     contexts = result.get("contexts")
     parameters = contexts[0].get("parameters")
     target_metric = parameters.get("target-metric")
@@ -67,7 +68,7 @@ def makeQuery(req):
     county = splitCS[0]
     if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
         return target_metric + year + "&RACE=" + race
-    elif metro_area is not None:
+    elif action == "metroPopRequest":
         return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
     elif county == "*":
         return year + target_metric + "&for=state:" + state
