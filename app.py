@@ -82,7 +82,7 @@ def makeQuery(req):
                 return target_metric + "&for=us:*&NAICS2012=" + naics_code
             return target_metric + "&for=state:" + state + "&NAICS2012=" + naics_code
         return target_metric + "&for=county:" + county + "&in=state:" + state + "&NAICS2012=" + naics_code
-    elif action == "metroEmploymentRequest":
+    elif action == "metroIndustryRequest":
         return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area + "&NAICS2012=" + naics_code
     elif action == "getPopulation":
         if county == "*":
