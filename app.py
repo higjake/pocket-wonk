@@ -60,12 +60,15 @@ def makeQuery(req):
     target_metric = parameters.get("target-metric")
     year = parameters.get("year")
     race = parameters.get("race")
+    metro_name = parameters.get("metro-name")
     countystate = parameters.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
     county = splitCS[0]
     if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
         return target_metric + year + "&RACE=" + race
+    elif metro_area is not None:
+        return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
     elif county == "*":
         return year + target_metric + "&for=state:" + state
 
