@@ -24,7 +24,7 @@ categoryMap = {
         'definition3': '000 individuals living in poverty nationwide. What else can I help you with?'
     },
     'RCPTOT': {
-        'definition': 'At last census (2012), the number of employee was ',
+        'definition': 'At last census (2012), the number of employees was ',
         'definition2': '. The industry generated $',
         'definition3': '000 annually. What else can I help you with?'
     }
@@ -67,6 +67,7 @@ def makeQuery(req):
     year = parameters.get("year")
     race = parameters.get("race")
     metro_area = parameters.get("metro-area")
+    naics_code = parameters.get("industry")
     countystate = parameters.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
@@ -76,6 +77,9 @@ def makeQuery(req):
     elif action == "metroPopRequest":
         return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
     elif action == "employmentRequest":
+        if state == "*"
+                return target_metric + "&for=us:*&NAICS2012=" + naics_code
+        
         return target_metric + "&for=state:" + state + "&NAICS2012=" + naics_code
     elif action == "metroEmploymentRequest":
         return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area + "&NAICS2012=" + naics_code
