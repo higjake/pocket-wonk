@@ -64,7 +64,7 @@ def makeQuery(req):
     splitCS = countystate.split( )
     state = splitCS[1]
     county = splitCS[0]
-    if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
+    if race in [1,2,4,7,10,12]:
         return target_metric + year + "&RACE=" + race
     elif county == "*":
         return year + target_metric + "&for=state:" + state
