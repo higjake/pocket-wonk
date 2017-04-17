@@ -60,7 +60,7 @@ def makeQuery(req):
     target_metric = parameters.get("target-metric")
     year = parameters.get("year")
     race = parameters.get("race")
-    metro_name = parameters.get("metro-name")
+    metro_area = parameters.get("metro-area")
     countystate = parameters.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
