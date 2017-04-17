@@ -14,14 +14,19 @@ from flask import make_response
 
 categoryMap = {
     'POP': {
-        'definition': 'population for ',
+        'definition': 'The population for ',
         'definition2': ' is ',
         'definition3': '. What else can I help you with?'
     },
     'POV': {
-        'definition': 'poverty rate is ',
+        'definition': 'The poverty rate was ',
         'definition2': ' percent, with ',
         'definition3': '000 individuals living in poverty nationwide. What else can I help you with?'
+    },
+    'RCPTOT': {
+        'definition': 'At last census (2012), the number of employee was ',
+        'definition2': '. The industry generated $',
+        'definition3': '000 annually. What else can I help you with?'
     }
 }
 
@@ -70,6 +75,10 @@ def makeQuery(req):
         return target_metric + year + "&RACE=" + race
     elif action == "metroPopRequest":
         return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
+    elif action == "employmentRequest":
+        return target_metric + "&for=state:" + state + "&NAICS2012=" + naics_code
+    elif action == "metroEmploymentRequest":
+        return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area + "&NAICS2012=" + naics_code
     elif county == "*":
         return year + target_metric + "&for=state:" + state
 
@@ -89,7 +98,7 @@ def makeWebhookResult(data):
     array1 = data[1] # Adding this line as a sanity check
     categories = data[0]
     lookup_value = categories[1]
-    speech = "The " + categoryMap[lookup_value]['definition'] + array1[0] + categoryMap[lookup_value]['definition2'] + array1[1] + categoryMap[lookup_value]['definition3']
+    speech = categoryMap[lookup_value]['definition'] + array1[0] + categoryMap[lookup_value]['definition2'] + array1[1] + categoryMap[lookup_value]['definition3']
 #     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
