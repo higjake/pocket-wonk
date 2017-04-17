@@ -80,10 +80,10 @@ def makeQuery(req):
         return target_metric + "&for=state:" + state + "&NAICS2012=" + naics_code
     elif action == "metroEmploymentRequest":
         return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area + "&NAICS2012=" + naics_code
-    elif county == "testtest":
-        return year + target_metric + "&for=state:" + state
-
-    return year + target_metric + "&for=county:" + county + "&in=state:" + state
+    elif action == "getPopulation"
+        if county == "*":
+            return year + target_metric + "&for=state:" + state
+        return year + target_metric + "&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
