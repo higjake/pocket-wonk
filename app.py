@@ -52,11 +52,14 @@ def makeQuery(req):
     parameters = contexts[0].get("parameters")
     target_metric = parameters.get("target-metric")
     year = parameters.get("year")
+    race = parameters.get("race")
     countystate = parameters.get("county-state")
     splitCS = countystate.split( )
     state = splitCS[1]
     county = splitCS[0]
-    if county == "*":
+    if race > 0:
+        return target_metric + year + "&RACE=" + race
+    elif county == "*":
         return year + target_metric + "&for=state:" + state
 
     return year + target_metric + "&for=county:" + county + "&in=state:" + state
