@@ -110,10 +110,14 @@ def makeWebhookResult(data):
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
     print(speech)
+    slack_message = {
+        "text": speech,
+        "attachments: []
+    }
     return {
         "speech": speech,
         "displayText": speech,
-        # "data": data,
+        "data": {"slack": slack_message},
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
