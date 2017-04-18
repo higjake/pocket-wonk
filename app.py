@@ -19,7 +19,7 @@ categoryMap = {
         'definition3': '. What else can I help you with?'
     },
     'POV': {
-        'definition': 'The poverty rate was ',
+        'definition': 'The poverty rate at last census (2015) was ',
         'definition2': ' percent, with ',
         'definition3': '000 individuals living in poverty nationwide. What else can I help you with?'
     },
