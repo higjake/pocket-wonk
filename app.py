@@ -111,7 +111,14 @@ def makeWebhookResult(data):
     print("Response:")
     print(speech)
     slack_message = {
-        "text": "test"
+        "text": "test",
+        "attachments": [
+            {
+                "title": "Test Title",
+                "title_link": "www.google.com",
+                "color": "#36a64f"
+            }
+        ]
     }
     print(slack_message)
     return {
