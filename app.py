@@ -113,10 +113,13 @@ def makeWebhookResult(data):
     slack_message = {
         "text": speech
     }
+    print(slack_message)
     return {
         "speech": speech,
         "displayText": speech,
-        "data": {"slack": slack_message},
+        "data": {
+            "slack": slack_message
+        },
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
