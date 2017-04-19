@@ -17,11 +17,8 @@ categoryMap = {
         'definition': 'According to the 2015 American Community Summary, the male population of ',
         'definition2': ' is ',
         'definition3': '.',
-        'slack-field1': 'Male Population',
-        'slack-field2': 'Total Population',
-        'slack-field3': 'Geography',
         'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html',
-        'slack-title': 'American Census Summary (2015)'
+        'slack-title': 'Find out more from the American Census Summary (2015)'
     },
     'POP': {
         'definition': 'The population for ',
