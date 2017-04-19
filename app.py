@@ -13,6 +13,16 @@ from flask import request
 from flask import make_response
 
 categoryMap = {
+    'B01001_002E': {
+        'definition': 'According to the 2015 American Community Summary, the male population of ',
+        'definition2': ' is ',
+        'definition3': '.'
+        'slack-field1': 'Male Population'
+        'slack-field2': 'Total Population'
+        'slack-field3': 'Geography'
+        'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html'
+        'slack-title': 'American Census Summary (2015)'
+    },
     'POP': {
         'definition': 'The population for ',
         'definition2': ' is ',
@@ -68,14 +78,14 @@ def makeQuery(req):
     race = parameters.get("race")
     metro_area = parameters.get("metro-area")
     naics_code = parameters.get("industry")
-    countystate = parameters.get("county-state")
-    splitCS = countystate.split( )
-    state = splitCS[1]
-    county = splitCS[0]
+    countycitystate = parameters.get("county-city-state")
+    splitCCS = countycitystate.split( )
+    state = splitCS[1] #state can be actual state or metro area/city
+    county = splitCCS[0]
     if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
         return target_metric + year + "&RACE=" + race
-    elif action == "metroPopRequest":
-        return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
+#     elif action == "metroPopRequest":
+#         return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
     elif action == "industryEmploymentRequest":
         if county == "*":
             if state == "*":
@@ -89,6 +99,8 @@ def makeQuery(req):
             if state == "*":
                 return year + target_metric + "&for=us:*"
             return year + target_metric + "&for=state:" + state
+        elif county == "city":
+            return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
         return year + target_metric + "&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
