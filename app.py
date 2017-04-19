@@ -16,11 +16,11 @@ categoryMap = {
     'B01001_002E': {
         'definition': 'According to the 2015 American Community Summary, the male population of ',
         'definition2': ' is ',
-        'definition3': '.'
-        'slack-field1': 'Male Population'
-        'slack-field2': 'Total Population'
-        'slack-field3': 'Geography'
-        'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html'
+        'definition3': '.',
+        'slack-field1': 'Male Population',
+        'slack-field2': 'Total Population',
+        'slack-field3': 'Geography',
+        'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html',
         'slack-title': 'American Census Summary (2015)'
     },
     'POP': {
@@ -78,7 +78,7 @@ def makeQuery(req):
     race = parameters.get("race")
     metro_area = parameters.get("metro-area")
     naics_code = parameters.get("industry")
-    countycitystate = parameters.get("county-city-state")
+    countycitystate = parameters.get("county-state")
     splitCCS = countycitystate.split( )
     state = splitCS[1] #state can be actual state or metro area/city
     county = splitCCS[0]
