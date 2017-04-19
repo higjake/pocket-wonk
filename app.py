@@ -81,7 +81,9 @@ def makeQuery(req):
     countycitystate = parameters.get("county-state")
     splitCCS = countycitystate.split( )
     state = splitCS[1] #state can be actual state or metro area/city
+    print(state)
     county = splitCCS[0]
+    print(county)
     if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
         return target_metric + year + "&RACE=" + race
 #     elif action == "metroPopRequest":
