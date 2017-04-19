@@ -80,7 +80,7 @@ def makeQuery(req):
     naics_code = parameters.get("industry")
     countycitystate = parameters.get("county-state")
     splitCCS = countycitystate.split( )
-    state = splitCS[1] #state can be actual state or metro area/city
+    state = splitCCS[1] #state can be actual state or metro area/city
     print(state)
     county = splitCCS[0]
     print(county)
