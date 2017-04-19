@@ -100,7 +100,7 @@ def makeQuery(req):
                 return year + target_metric + "&for=us:*"
             return year + target_metric + "&for=state:" + state
         elif county == "city":
-            return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + metro_area
+            return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
         return year + target_metric + "&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
