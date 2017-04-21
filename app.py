@@ -19,8 +19,8 @@ categoryMap = {
         'definition3': '.',
         'pretext1': 'The male population of ',
         'pretext2': ' is ',
-        'pretext3': '. This is '
-        'pretext4': '% of the total population.'
+        'pretext3': '. This is ',
+        'pretext4': '% of the total population.',
         'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html',
         'slack-title': 'Find out more from the American Census Summary (2015)'
     },
@@ -131,7 +131,7 @@ def makeWebhookResult(data):
     print(speech)
     slack_text = categoryMap[lookup_value]['pretext1'] + array1[0] + categoryMap[lookup_value]['pretext2'] + array1[1] + categoryMap[lookup_value]['pretext3'] + array1[1]/array1[2]*100 + categoryMap[lookup_value]['pretext4'] 
     slack_message = {
-        "text": slack_text,
+        "text": speech,
     }
     print(slack_message)
     return {
