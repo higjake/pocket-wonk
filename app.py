@@ -13,7 +13,7 @@ from flask import request
 from flask import make_response
 
 metricMap = {
-    'B01001_002E': 'The male population of '
+    'B01001_002E': 'The male population of ',
     'POP': 'The population of ',
     'POV': 'The poverty rate of ',
     'RCPTOT': 'The number of employees of '
