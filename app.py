@@ -77,7 +77,6 @@ def makeQuery(req):
     target_metric = parameters.get("target-metric")
     year = parameters.get("year")
     race = parameters.get("race")
-    metro_area = parameters.get("metro-area")
     naics_code = parameters.get("industry")
     countycitystate = parameters.get("county-state")
     splitCCS = countycitystate.split( )
