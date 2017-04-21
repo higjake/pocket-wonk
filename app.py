@@ -128,13 +128,12 @@ def makeWebhookResult(data):
     speech = categoryMap[lookup_value]['definition'] + array1[0] + categoryMap[lookup_value]['definition2'] + array1[1] + categoryMap[lookup_value]['definition3']
     print("Response:")
     print(speech)
-    slack_text = categoryMap[lookup_value]['pretext1'] + array1[0] + categoryMap[lookup_value]['pretext2'] + array1[1] + categoryMap[lookup_value]['pretext3'] + int(array1[1])/int(array1[2])*100 + categoryMap[lookup_value]['pretext4'] 
+    slack_text = categoryMap[lookup_value]['pretext1'] + array1[0] + categoryMap[lookup_value]['pretext2'] + array1[1] + categoryMap[lookup_value]['pretext3'] + str(int(array1[1])*100/int(array1[2])) + categoryMap[lookup_value]['pretext4'] 
     print("Slack Response:")
     print(slack_text)
     slack_message = {
         "text": slack_text,
     }
-    print(slack_message)
     return {
         "speech": speech,
         "displayText": speech,
