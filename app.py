@@ -12,8 +12,17 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-categoryMap = {
-    'B01001_002E': {
+metricMap = {
+    'B01001_002E': 'The male population of '
+    'POP': 'The population of ',
+    'POV': 'The poverty rate of ',
+    'RCPTOT': 'The number of employees of '
+}
+speechMap = {
+    'part2': ' is ',
+    'part3': '. That is ',
+    'part4': 'percent of the total population.',
+    'NAME': {
         'definition': 'According to the 2015 American Community Summary, the male population of ',
         'definition2': ' is ',
         'definition3': '.',
@@ -105,11 +114,11 @@ def makeQuery(req):
     elif action == "demographicRequest":
         if county == "*":
             if state == "*":
-                return target_metric + ",B01001_001E&for=us:*"
-            return target_metric + ",B01001_001E&for=state:" + state
+                return target_metric + demo_lookup + ",B01001_001E&for=us:*"
+            return target_metric + demo_lookup + ",B01001_001E&for=state:" + state
         elif county == "city":
-            return target_metric + ",B01001_001E&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
-        return target_metric + ",B01001_001E&for=county:" + county + "&in=state:" + state
+            return target_metric + demo_lookup + ",B01001_001E&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
+        return target_metric + demo_lookup + ",NAME,B01001_001E&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
