@@ -17,6 +17,10 @@ categoryMap = {
         'definition': 'According to the 2015 American Community Summary, the male population of ',
         'definition2': ' is ',
         'definition3': '.',
+        'pretext1': 'The male population of ',
+        'pretext2': ' is ',
+        'pretext3': '. This is '
+        'pretext4': '% of the total population.'
         'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html',
         'slack-title': 'Find out more from the American Census Summary (2015)'
     },
@@ -91,7 +95,6 @@ def makeQuery(req):
         elif county == "city":
             return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state + "&NAICS2012=" + naics_code
         return target_metric + "&for=county:" + county + "&in=state:" + state + "&NAICS2012=" + naics_code
-    
     elif action == "getPopulation":
         if county == "*":
             if state == "*":
@@ -100,6 +103,14 @@ def makeQuery(req):
         elif county == "city":
             return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
         return year + target_metric + "&for=county:" + county + "&in=state:" + state
+    elif action == "demographicRequest":
+        if county == "*":
+            if state == "*":
+                return target_metric + ",B01001_001E&for=us:*"
+            return target_metric + ",B01001_001E&for=state:" + state
+        elif county == "city":
+            return target_metric + ",B01001_001E&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
+        return target_metric + ",B01001_001E&for=county:" + county + "&in=state:" + state
 
 def makeWebhookResult(data):
     array1 = data[1]
@@ -116,12 +127,11 @@ def makeWebhookResult(data):
     categories = data[0]
     lookup_value = categories[1]
     speech = categoryMap[lookup_value]['definition'] + array1[0] + categoryMap[lookup_value]['definition2'] + array1[1] + categoryMap[lookup_value]['definition3']
-#     actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
-#     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
     print(speech)
+    slack_text = categoryMap[lookup_value]['pretext1'] + array1[0] + categoryMap[lookup_value]['pretext2'] + array1[1] + categoryMap[lookup_value]['pretext3'] + array1[1]/array1[2]*100 + categoryMap[lookup_value]['pretext4'] 
     slack_message = {
-        "text": speech,
+        "text": slack_text,
     }
     print(slack_message)
     return {
