@@ -31,7 +31,7 @@ def webhook():
     print('Duration: {:10.4f} seconds'.format(end - start))
     return r
 def processRequest(req):
-    if req.get('result').get('action') == 'randomdisney'
+    if req.get('result').get('action') == 'randomdisney':
         import random
         random_number = random.randint(0,5)
     res = makeWebhookResult(random_number)
