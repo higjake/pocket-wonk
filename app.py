@@ -12,7 +12,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-videoArray = [
+videoArray = ['https://www.youtube.com/watch?v=9ogQ0uge06o','https://www.youtube.com/watch?v=V-zXT5bIBM0','https://www.youtube.com/watch?v=nXpB1rixnPQ','https://www.youtube.com/watch?v=Pa0lMzaljTk','https://www.youtube.com/watch?v=nbY_aP-alkw','https://www.youtube.com/watch?v=nPImqZo0D74']
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -33,7 +33,7 @@ def webhook():
 def processRequest(req):
     if req.get('result').get('action') == 'randomdisney'
         import random
-        random_number = random.randint(0,50)
+        random_number = random.randint(0,5)
     res = makeWebhookResult(random_number)
     return res
 
