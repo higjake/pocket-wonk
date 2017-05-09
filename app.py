@@ -12,43 +12,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-metricMap = {
-    'B01001_002E': 'The male population of ',
-    'POP': 'The population of ',
-    'POV': 'The poverty rate of ',
-    'RCPTOT': 'The number of employees of '
-}
-speechMap = {
-    'part2': ' is ',
-    'part3': '. That is ',
-    'part4': 'percent of the total population.',
-    'NAME': {
-        'definition': 'According to the 2015 American Community Summary, the male population of ',
-        'definition2': ' is ',
-        'definition3': '.',
-        'pretext1': 'The male population of ',
-        'pretext2': ' is ',
-        'pretext3': '. This is ',
-        'pretext4': '% of the total population.',
-        'slack-url': 'https://www.census.gov/programs-surveys/acs/data/summary-file.html',
-        'slack-title': 'Find out more from the American Census Summary (2015)'
-    },
-    'POP': {
-        'definition': 'The population for ',
-        'definition2': ' is ',
-        'definition3': '. What else can I help you with?'
-    },
-    'POV': {
-        'definition': 'The poverty rate at last census (2015) was ',
-        'definition2': ' percent, with ',
-        'definition3': '000 individuals living in poverty nationwide. What else can I help you with?'
-    },
-    'RCPTOT': {
-        'definition': 'At last census (2012), the number of employees was ',
-        'definition2': '. The industry generated $',
-        'definition3': '000 annually. What else can I help you with? You can look up industry employment figures and valuations by city, state, county, or nationwide. '
-    }
-}
+videoArray = [
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -67,77 +31,17 @@ def webhook():
     print('Duration: {:10.4f} seconds'.format(end - start))
     return r
 def processRequest(req):
-    baseurl = "https://api.census.gov/data/"
-    url_query = makeQuery(req)
-    if url_query is None:
-        return {}
-    final_url = baseurl + url_query
-#     #final_url = baseurl + urlencode({url_query})
-#     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
-    result = urlopen(final_url).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
+    if req.get('result').get('action') == 'randomdisney'
+        import random
+        random_number = random.randint(0,50)
+    res = makeWebhookResult(random_number)
     return res
-def makeQuery(req):
-    result = req.get("result")
-    action = result.get("action")
-    contexts = result.get("contexts")
-    parameters = contexts[0].get("parameters")
-    target_metric = parameters.get("target-metric")
-    year = parameters.get("year")
-    race = parameters.get("race")
-    naics_code = parameters.get("industry")
-    countycitystate = parameters.get("county-state")
-    splitCCS = countycitystate.split( )
-    state = splitCCS[1] #state can be actual state or metro area/city
-    print(state)
-    county = splitCCS[0]
-    print(county)
-    if target_metric == "timeseries/poverty/histpov2?get=PCTPOV,POV,POP&time=":
-        return target_metric + year + "&RACE=" + race
-    elif action == "industryEmploymentRequest":
-        if county == "*":
-            if state == "*":
-                return target_metric + "&for=us:*&NAICS2012=" + naics_code
-            return target_metric + "&for=state:" + state + "&NAICS2012=" + naics_code
-        elif county == "city":
-            return target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state + "&NAICS2012=" + naics_code
-        return target_metric + "&for=county:" + county + "&in=state:" + state + "&NAICS2012=" + naics_code
-    elif action == "getPopulation":
-        if county == "*":
-            if state == "*":
-                return year + target_metric + "&for=us:*"
-            return year + target_metric + "&for=state:" + state
-        elif county == "city":
-            return year + target_metric + "&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
-        return year + target_metric + "&for=county:" + county + "&in=state:" + state
-    elif action == "demographicRequest":
-        if county == "*":
-            if state == "*":
-                return target_metric + demo_lookup + ",B01001_001E&for=us:*"
-            return target_metric + demo_lookup + ",B01001_001E&for=state:" + state
-        elif county == "city":
-            return target_metric + demo_lookup + ",B01001_001E&for=metropolitan+statistical+area/micropolitan+statistical+area:" + state
-        return target_metric + demo_lookup + ",NAME,B01001_001E&for=county:" + county + "&in=state:" + state
 
-def makeWebhookResult(data):
-    array1 = data[1]
-    if array1 is None:
-        return {
-        "speech": "this failed",
-        "displayText": "this failed",
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"}
-    
-    # print(json.dumps(item, indent=4))
-    array1 = data[1] # Adding this line as a sanity check
-    categories = data[0]
-    lookup_value = categories[1]
-    speech = categoryMap[lookup_value]['definition'] + array1[0] + categoryMap[lookup_value]['definition2'] + array1[1] + categoryMap[lookup_value]['definition3']
+def makeWebhookResult(random_number):
+    speech = videoArray[random_number]
     print("Response:")
     print(speech)
-    slack_text = categoryMap[lookup_value]['pretext1'] + array1[0] + categoryMap[lookup_value]['pretext2'] + array1[1] + categoryMap[lookup_value]['pretext3'] + str(int(array1[1])*100/int(array1[2])) + categoryMap[lookup_value]['pretext4'] 
+    slack_text = "<" + speech + ">"
     print("Slack Response:")
     print(slack_text)
     slack_message = {
@@ -150,7 +54,7 @@ def makeWebhookResult(data):
             "slack": slack_message
         },
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
+        "source": "Jake Higdon"
     }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
