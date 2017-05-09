@@ -1,7 +1,7 @@
 {
-  "name": "API.AI Census webhook demonstration",
-  "description": "API.AI Census webhook demonstration",
-  "repository": "https://github.com/higjake/census-bureau",
+  "name": "Random Disney",
+  "description": "Random Disney",
+  "repository": "https://github.com/higjake/randomdisney",
   "logo": "http://xvir.github.io/img/apiai.png",
   "keywords": ["api.ai", "natural language"]
 }
