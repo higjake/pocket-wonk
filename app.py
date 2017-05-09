@@ -33,10 +33,10 @@ def webhook():
 def processRequest(req):
     if req.get('result').get('action') != 'randomdisney':
         return {}
-    import random
-    random_number = random.randint(0,5)
-    print(random_number)
-    speech = videoArray[random_number]
+#     import random
+# #     random_number = random.randint(0,5)
+#     print(random_number)
+    speech = videoArray[5]
     print("Response:")
     print(speech)
     slack_text = "<" + speech + ">"
