@@ -34,10 +34,7 @@ def processRequest(req):
     if req.get('result').get('action') == 'randomdisney':
         import random
         random_number = random.randint(0,5)
-    res = makeWebhookResult(random_number)
-    return res
-
-def makeWebhookResult(random_number):
+    print(random_number)
     speech = videoArray[random_number]
     print("Response:")
     print(speech)
@@ -56,6 +53,7 @@ def makeWebhookResult(random_number):
         # "contextOut": [],
         "source": "Jake Higdon"
     }
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
