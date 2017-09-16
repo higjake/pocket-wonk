@@ -1,4 +1,4 @@
-
+import requests
 
 # Replace with the correct URL
 url = "https://api.propublica.org/congress/v1/115/senate/members.json"
