@@ -9,3 +9,4 @@ headers = {
 # It is a good practice not to hardcode the credentials. So ask the user to enter credentials at runtime
 myResponse = requests.get(url,headers=headers)
 print (myResponse.status_code)
+ 
